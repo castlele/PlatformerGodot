@@ -1,9 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cibtr5xpcrwf"]
+[gd_scene load_steps=9 format=3 uid="uid://cibtr5xpcrwf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_p58ai"]
 [ext_resource type="Texture2D" uid="uid://bn16d3kckma5o" path="res://characters_packed.png" id="1_uwxu4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87mfu"]
+atlas = ExtResource("1_uwxu4")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db7kv"]
+atlas = ExtResource("1_uwxu4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaq67"]
+atlas = ExtResource("1_uwxu4")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr3kd"]
 atlas = ExtResource("1_uwxu4")
 region = Rect2(0, 0, 24, 24)
 
@@ -16,21 +28,26 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db7kv")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaq67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr3kd")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
 }]
-
-[sub_resource type="GDScript" id="GDScript_tnh3l"]
-script/source = "extends AnimatedSprite2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ym0bk"]
 size = Vector2(10, 16)
@@ -40,10 +57,11 @@ script = ExtResource("1_p58ai")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8jkb0")
-animation = &"idle"
+animation = &"run"
 flip_h = true
-script = SubResource("GDScript_tnh3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_ym0bk")
+
+[node name="Camera2D" type="Camera2D" parent="."]

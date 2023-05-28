@@ -1,54 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdumhuev5vxql"]
+[gd_scene load_steps=5 format=3 uid="uid://bdumhuev5vxql"]
 
-[ext_resource type="PackedScene" uid="uid://puvytafo1sqm" path="res://block.tscn" id="1_4b3f6"]
+[ext_resource type="Script" path="res://world.gd" id="1_crny3"]
 [ext_resource type="PackedScene" uid="uid://cibtr5xpcrwf" path="res://player.tscn" id="2_f0628"]
+[ext_resource type="PackedScene" uid="uid://b5vqrauhyiy4t" path="res://tileMap.tscn" id="2_q5juh"]
+[ext_resource type="PackedScene" uid="uid://vibhqc3ol0wt" path="res://spikes.tscn" id="3_vrns5"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_crny3")
 
-[node name="Block" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(63, 117)
+[node name="TileMap" parent="." instance=ExtResource("2_q5juh")]
+layer_0/tile_data = PackedInt32Array(589824, 65537, 7, 589825, 131073, 7, 589826, 131073, 7, 589827, 131073, 7, 589828, 131073, 7, 589829, 131073, 7, 589830, 131073, 7, 589831, 131073, 7, 589832, 131073, 7, 589833, 131073, 7, 589834, 131073, 7, 589835, 131073, 7, 589836, 131073, 7, 589837, 131073, 7, 589838, 131073, 7, 589839, 131073, 7, 589840, 131073, 7, 589841, 196609, 7, 524305, 196609, 6, 524304, 131073, 6, 524303, 131073, 6, 524302, 131073, 6, 524301, 131073, 6, 524300, 131073, 6, 524299, 131073, 6, 524298, 327681, 1, 524297, 131073, 1, 524296, 131073, 1, 524295, 131073, 1, 524294, 131073, 1, 524293, 131073, 1, 524292, 262145, 1, 524291, 131073, 6, 524290, 327681, 1, 524289, 131073, 1, 524288, 65537, 6, 458752, 1, 6, 393216, 1, 6, 327680, 1, 6, 262144, 1, 6, 196608, 1, 6, 131072, 1, 6, 65536, 1, 1, 458769, 196609, 6, 458768, 131073, 6, 458767, 131073, 6, 458766, 131073, 6, 458765, 131073, 6, 458764, 131073, 6, 458763, 327681, 1, 458762, 65537, 1, 393233, 196609, 6, 393232, 131073, 6, 393231, 131073, 6, 393230, 131073, 6, 393229, 131073, 6, 393228, 327681, 1, 393227, 65537, 1, 327692, 65537, 1, 327693, 131073, 1, 327694, 131073, 1, 327695, 327681, 1, 327696, 131073, 6, 327697, 196609, 6, 262161, 196609, 6, 262160, 131073, 6, 262159, 65537, 6, 196623, 65537, 1, 196624, 131073, 1, 196625, 196609, 1, 262151, 65537, 0, 262152, 131073, 0, 262153, 196609, 0, 131075, 65537, 0, 131076, 131073, 0, 131077, 131073, 0, 131078, 131073, 0, 131079, 196609, 0, 458754, 65537, 1, 393219, 1, 1, 458756, 196609, 1, 458755, 327681, 1)
 
-[node name="Block2" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(81, 117)
+[node name="Spikes" parent="." instance=ExtResource("3_vrns5")]
+position = Vector2(27, 146)
 
-[node name="Block3" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(99, 117)
+[node name="Spikes2" parent="." instance=ExtResource("3_vrns5")]
+position = Vector2(171, 146)
 
-[node name="Block4" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(117, 117)
-
-[node name="Block5" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(135, 117)
-
-[node name="Block6" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(153, 117)
-
-[node name="Block7" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(171, 117)
-
-[node name="Block8" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(189, 117)
-
-[node name="Block9" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(189, 99)
-
-[node name="Block10" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(207, 99)
-
-[node name="Block11" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(207, 81)
-
-[node name="Block12" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(225, 81)
-
-[node name="Block13" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(243, 81)
-
-[node name="Block14" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(261, 81)
-
-[node name="Block15" parent="." instance=ExtResource("1_4b3f6")]
-position = Vector2(279, 81)
+[node name="Spikes3" parent="." instance=ExtResource("3_vrns5")]
+position = Vector2(108, 38)
 
 [node name="Player" parent="." instance=ExtResource("2_f0628")]
 position = Vector2(99, 72)
