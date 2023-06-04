@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqunx33p1vwh8"]
+
+[ext_resource type="Texture2D" uid="uid://bn16d3kckma5o" path="res://characters_packed.png" id="1_qg11x"]
+[ext_resource type="PackedScene" uid="uid://coyjpcvr6yp1h" path="res://hit_box.tscn" id="2_q2e72"]
+
+[sub_resource type="GDScript" id="GDScript_umpmo"]
+script/source = "class_name WalkingEnemy
+extends CharacterBody2D
+
+enum AnimationState { MOVE }
+
+@export var SPEED = 20.0
+
+const GRAVITY = 800.0
+
+@onready var animatedSprite = $AnimatedSprite2D
+@onready var edgeCheckRight = $EdgeCheckRight
+@onready var edgeCheckLeft = $EdgeCheckLeft
+
+var current_direction = Vector2.RIGHT
+
+
+func _physics_process(delta):
+    apply_gravity(delta)
+    change_direction_if_needed()
+    move()
+
+    move_and_slide()
+
+
+func apply_gravity(delta: float):
+    velocity.y += GRAVITY * delta
+
+
+func change_direction_if_needed():
+    if is_on_wall() or not edgeCheckRight.is_colliding() or not edgeCheckLeft.is_colliding():
+        current_direction.x *= -1
+
+
+func move():
+    velocity.x = SPEED * current_direction.x
+    _h_flip()
+    _animate(AnimationState.MOVE)
+
+
+func _h_flip():
+    animatedSprite.flip_h = current_direction.x > 0
+
+
+func _animate(state: AnimationState):
+    var str_state_name = AnimationState.keys()[state].to_lower()
+    animatedSprite.play(str_state_name)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ljbk"]
+atlas = ExtResource("1_qg11x")
+region = Rect2(144, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv2af"]
+atlas = ExtResource("1_qg11x")
+region = Rect2(168, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8ptv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ljbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv2af")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe6cm"]
+size = Vector2(11, 10)
+
+[node name="WalkingEnemy" type="CharacterBody2D"]
+collision_layer = 2
+script = SubResource("GDScript_umpmo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_t8ptv")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 7)
+shape = SubResource("RectangleShape2D_fe6cm")
+
+[node name="EdgeCheckRight" type="RayCast2D" parent="."]
+position = Vector2(5, 11)
+target_position = Vector2(2.08165e-12, 4)
+
+[node name="EdgeCheckLeft" type="RayCast2D" parent="."]
+position = Vector2(-6, 11)
+target_position = Vector2(2.08165e-12, 4)
+
+[node name="HitBox" parent="." instance=ExtResource("2_q2e72")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
+polygon = PackedVector2Array(-6, 10, -6, 2, -4, 1, -2, -2, -1, -4, 0, -4, 1, -2, 3, 1, 5, 2, 5, 10)
